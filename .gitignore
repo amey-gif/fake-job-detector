@@ -1,15 +1,6 @@
-# Data (too large for GitHub)
 data/
-
-# Model binaries
 model/*.pkl
-
-# Jupyter checkpoints
 .ipynb_checkpoints/
-
-# Python cache
 __pycache__/
 *.pyc
-
-# Environment
 .env
