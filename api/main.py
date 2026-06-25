@@ -8,7 +8,7 @@ import numpy as np
 import scipy.sparse as sp
 import shap
 
-
+has_emojis: int = 0
 
 app = FastAPI()
 
@@ -77,6 +77,24 @@ def predict(job: JobPosting):
     X_final = sp.hstack([X_text, X_meta])
 
     prob = model.predict_proba(X_final)[0][1]
+
+    india_scam_keywords = [
+    "registration fee", "send aadhaar", "wire transfer",
+    "placement support", "google form", "no stipend",
+    "earn from home", "part time earn", "data entry work from home",
+    "responses managed off linkedin", "certificate provided",
+    "100% placement", "work from home earn"
+    ]
+
+    combined_lower = combined.lower()
+    keyword_hits = sum(1 for kw in india_scam_keywords if kw in combined_lower)
+    boost = keyword_hits * 0.15
+
+    if job.has_emojis:
+        boost += 0.10
+
+    prob = min(1.0, prob + boost)
+
     verdict = "FAKE" if prob >= 0.5 else "REAL"
 
     shap_vals = explainer.shap_values(X_final)

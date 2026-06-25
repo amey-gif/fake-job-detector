@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 320px;
+      padding: 16px;
+      font-family: Arial, sans-serif;
+    }
+    h2 { margin: 0 0 12px; font-size: 16px; }
+    #result { margin-top: 12px; }
+    .fake { color: #d32f2f; font-weight: bold; }
+    .real { color: #2e7d32; font-weight: bold; }
+    .reason { font-size: 12px; margin: 4px 0; color: #555; }
+    button {
+      width: 100%;
+      padding: 8px;
+      background: #1a73e8;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover { background: #1558b0; }
+    #status { font-size: 12px; color: #888; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h2>Fake Job Detector</h2>
+  <button id="scanBtn">Scan This Job Posting</button>
+  <div id="status"></div>
+  <div id="result"></div>
+  <script src="popup.js"></script>
+</body>
+</html>

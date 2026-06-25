@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Fake Job Detector",
+  "version": "1.0",
+  "description": "Detects fake job and internship postings using AI",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": [
+    "https://*.linkedin.com/*",
+    "https://*.naukri.com/*",
+    "https://*.internshala.com/*",
+    "https://*.indeed.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "https://*.naukri.com/*",
+        "https://*.internshala.com/*",
+        "https://*.indeed.com/*"
+      ],
+      "js": ["content.js"]
+    }
+  ]
+}
