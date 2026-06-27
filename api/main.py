@@ -7,15 +7,30 @@ import re
 import numpy as np
 import scipy.sparse as sp
 import shap
+from fastapi import Request
+from fastapi.responses import JSONResponse
+
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.options("/predict")
+async def options_predict(request: Request):
+    return JSONResponse(
+        content={},
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+        }
+    )
 
 model = joblib.load("../model/model.pkl")
 tfidf = joblib.load("../model/tfidf.pkl")
