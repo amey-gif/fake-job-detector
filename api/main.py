@@ -8,8 +8,6 @@ import numpy as np
 import scipy.sparse as sp
 import shap
 
-has_emojis: int = 0
-
 app = FastAPI()
 
 app.add_middleware(
@@ -41,6 +39,8 @@ class JobPosting(BaseModel):
     employment_type: str = "unknown"
     required_experience: str = "unknown"
     has_salary: int = 0
+    has_emojis: int = 0
+
 
 def clean_text(text):
     text = text.lower()
