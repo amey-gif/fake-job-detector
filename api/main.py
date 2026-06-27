@@ -110,6 +110,7 @@ def predict(job: JobPosting):
 
     prob = min(1.0, prob + boost)
 
+
     verdict = "FAKE" if prob >= 0.5 else "REAL"
 
     shap_vals = explainer.shap_values(X_final)
@@ -121,7 +122,10 @@ def predict(job: JobPosting):
     ]
 
     return {
-        "verdict": verdict,
-        "fake_probability": round(float(prob), 4),
-        "top_reasons": top_reasons
-    }   
+    "verdict": verdict,
+    "fake_probability": round(float(prob), 4),
+    "keyword_hits": keyword_hits,
+    "boost": round(boost, 4),
+    "has_emojis": job.has_emojis,
+    "top_reasons": top_reasons
+    }
